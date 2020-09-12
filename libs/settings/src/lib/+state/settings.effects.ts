@@ -20,7 +20,7 @@ export class SettingsEffects {
         image: data.image,
         username: data.username,
         bio: data.bio,
-        pass: data.pass,
+        password: data.password,
         email: data.email,
       })),
       concatMap(data =>
