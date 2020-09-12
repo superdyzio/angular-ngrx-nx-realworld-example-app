@@ -67,6 +67,18 @@
             }
           }
         },
+        "serve-e2e": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "conduit:build",
+            "port": 4201
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "conduit:build:production"
+            }
+          }
+        },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
@@ -100,7 +112,7 @@
           "builder": "@nrwl/cypress:cypress",
           "options": {
             "cypressConfig": "apps/conduit-e2e/cypress.json",
-            "devServerTarget": "conduit:serve",
+            "devServerTarget": "conduit:serve-e2e",
             "tsConfig": "apps/conduit-e2e/tsconfig.e2e.json"
           }
         },
