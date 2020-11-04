@@ -50,6 +50,13 @@
     },
     "shared": {
       "tags": ["shared"]
+    },
+    "conduit-protractor": {
+      "tags": []
+    },
+    "conduit-protractor-e2e": {
+      "tags": [],
+      "implicitDependencies": ["conduit-protractor"]
     }
   }
 }
