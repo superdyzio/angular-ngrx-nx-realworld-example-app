@@ -9,5 +9,5 @@
   "videosFolder": "../../dist/cypress/apps/conduit-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/apps/conduit-e2e/screenshots",
   "chromeWebSecurity": false,
-  "baseUrl": "http://localhost:4201"
+  "baseUrl": "http://localhost:4201/"
 }

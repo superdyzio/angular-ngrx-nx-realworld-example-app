@@ -9,7 +9,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
-    "e2e": "ng e2e",
+    "e2e": "npm run reset-db && ng e2e",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
@@ -27,7 +27,10 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "deploy": "firebase deploy --token $FIREBASE_TOKEN --non-interactive",
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
+    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
+    "db:drop": "mongo conduit --eval \"db.dropDatabase()\"",
+    "db:seed": "mongorestore --nsFrom=conduit.* --nsTo=conduit.* ../db-initial-data/",
+    "reset-db": "npm run db:drop && npm run db:seed"
   },
   "private": true,
   "dependencies": {
