@@ -7,16 +7,23 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-// eslint-disable-next-line @typescript-eslint/no-namespace
-declare namespace Cypress {
-  interface Chainable<Subject> {
-    login(email: string, password: string): void;
-  }
-}
+
 //
 // -- This is a parent command --
 Cypress.Commands.add('login', (email, password) => {
-  console.log('Custom command example: Login', email, password);
+  cy.request({
+    method: 'POST',
+    url: 'http://localhost:3000/api/users/login',
+    body: { user: { email, password } },
+  })
+    .its('body.user.token')
+    .then(token => {
+      window.localStorage.setItem('jwtToken', token);
+      cy.reload();
+    });
+});
+Cypress.Commands.add('clickNavItem', href => {
+  cy.get(`a.nav-link[href="${href}"]`).click();
 });
 //
 // -- This is a child command --
@@ -28,4 +35,8 @@ Cypress.Commands.add('login', (email, password) => {
 //
 //
 // -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
+  console.log('visit command overwritten');
+
+  return originalFn(url, options);
+});
