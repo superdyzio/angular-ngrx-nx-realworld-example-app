@@ -1,7 +1,8 @@
-Feature: Is it Friday yet?
-  Everybody wants to know when it's Friday
+Feature: Auth
+  Login and registration processes
 
-  Scenario: Sunday isn't Friday
-    Given today is Sunday
-    When I ask whether it's Friday yet
-    Then I should be told "Nope"
+  Scenario: I want to log in
+    Given I am on the Login Page
+    When I type my credentials
+    And I submit the form
+    Then I should be redirected to the Home Page

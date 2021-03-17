@@ -1,14 +1,20 @@
-import { When, Then } from 'cypress-cucumber-preprocessor/steps';
+import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps';
+import { DEFAULT_URL, EMAIL_DOMAIN, EMAILS, LOGIN_URL, PASSWORDS } from '../../../support/constants';
+import { getEmailInput, getPasswordInput, getSubmitButton } from '../../../support/auth.po';
 
-function isItFriday(today) {
-  // We'll leave the implementation blank for now
-  return 'Nope';
-}
-
-When("I ask whether it's Friday yet", function() {
-  this.actualAnswer = isItFriday(this.today);
+Given('I am on the Login Page',function () {
+  cy.visit(LOGIN_URL);
 });
 
-Then('I should be told {string}', function(expectedAnswer) {
-  assert.equal(this.actualAnswer, expectedAnswer);
+When('I type my credentials',function () {
+  getEmailInput().type(`${EMAILS.Morty}${EMAIL_DOMAIN}`);
+  getPasswordInput().type(`${PASSWORDS.Morty}{enter}`);
+});
+
+When('I submit the form',function () {
+  getSubmitButton().click();
+});
+
+Then('I should be redirected to the Home Page',function () {
+  cy.url().should('eq', `${Cypress.config('baseUrl')}${DEFAULT_URL}`);
 });
